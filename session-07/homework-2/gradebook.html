@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Session 07 — Student Gradebook & Honors Dashboard</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #4338ca;
+      --mint: #15803d;
+      --amber: #b45309;
+      --rose: #dc2626;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 48px 24px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .dashboard-header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .dashboard-header p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    /* Metric summary cards */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .metric-card {
+      background: var(--panel);
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    .metric-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .metric-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    /* Data table */
+    .table-card {
+      background: var(--panel);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+      padding: 16px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 16px 20px;
+      font-size: 15px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:hover {
+      background: #fafafa;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .badge-honor {
+      background: rgba(21, 128, 61, 0.12);
+      color: var(--mint);
+    }
+    .badge-pass {
+      background: rgba(67, 56, 202, 0.1);
+      color: var(--accent);
+    }
+    .badge-risk {
+      background: rgba(220, 38, 38, 0.12);
+      color: var(--rose);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="dashboard-header">
+      <h1>Cohort Performance Dashboard</h1>
+      <p>Dynamic DOM rendering via JavaScript function pipelines</p>
+    </header>
+
+    <!-- Metrics summary -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Cohort Average</div>
+        <div id="stat-cohort-avg" class="metric-value">--%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Honor Students</div>
+        <div id="stat-honors-count" class="metric-value">--</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">At-Risk Students</div>
+        <div id="stat-risk-count" class="metric-value">--</div>
+      </div>
+    </div>
+
+    <!-- Student table -->
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Major</th>
+            <th>Average</th>
+            <th>Grade</th>
+            <th>Academic Status</th>
+          </tr>
+        </thead>
+        <tbody id="gradebook-tbody">
+          <!-- Dynamically inserted rows -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="./gradebook.js"></script>
+</body>
+</html>
