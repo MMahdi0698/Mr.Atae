@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Session 07 — Dynamic Product Catalog</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #de3b3d;
+      --sale: #16a34a;
+      --soldout: #dc2626;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .catalog-header {
+      text-align: center;
+    }
+    .catalog-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .catalog-header p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .product-card.card-highlight {
+      border: 2px solid var(--accent);
+      box-shadow: 0 10px 30px -4px rgba(222, 59, 61, 0.15);
+    }
+
+    .card-image-box {
+      height: 220px;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--muted);
+      position: relative;
+    }
+
+    .badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: none;
+    }
+    .badge.badge-sale {
+      display: inline-block;
+      background: var(--sale);
+      color: #ffffff;
+    }
+    .badge.badge-out-of-stock {
+      display: inline-block;
+      background: var(--soldout);
+      color: #ffffff;
+    }
+
+    .card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .product-category {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .product-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.25;
+    }
+
+    .product-description {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .pricing-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .current-price {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .original-price {
+      font-size: 16px;
+      color: var(--muted);
+      text-decoration: line-through;
+      display: none;
+    }
+    .original-price.is-discounted {
+      display: inline;
+    }
+
+    .inventory-status {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .inventory-status.low-stock {
+      color: #b45309;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="catalog-header">
+      <h1>Featured Showcase</h1>
+      <p>Rendered dynamically with JavaScript functions</p>
+    </header>
+
+    <article id="hero-product-card" class="product-card">
+      <div class="card-image-box">
+        <span id="product-img-label">[ High-Res Audio Canvas ]</span>
+        <span id="product-badge" class="badge">Sale</span>
+      </div>
+      <div class="card-body">
+        <span id="product-category" class="product-category">Category</span>
+        <h2 id="product-title" class="product-title">Product Title</h2>
+        <p id="product-description" class="product-description">Description copy goes here...</p>
+        <div class="pricing-row">
+          <span id="current-price" class="current-price">$0.00</span>
+          <span id="original-price" class="original-price">$0.00</span>
+        </div>
+        <p id="inventory-status" class="inventory-status">Checking stock...</p>
+      </div>
+    </article>
+  </div>
+
+  <script src="./catalog.js"></script>
+</body>
+</html>
